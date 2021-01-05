@@ -1,0 +1,45 @@
+
+@hostname = https://api.businesscentral.dynamics.com/v2.0/c4f3bcf1-a4f8-449e-bdc3-582c4d5045c1/mySandbox
+
+@userName = admin.prem
+@password = atSfNUqouQCd6VvF3lnLYX6E0RVDtnsXMSynqyoUxog=
+
+
+###
+// standard APIs
+GET {{hostname}}/api/v2.0/ HTTP/1.1
+Authorization: Basic {{userName}}:{{password}}
+
+###
+//companies
+GET {{hostname}}/api/v2.0/companies/?$select=id,name,displayName HTTP/1.1
+Authorization: Basic {{userName}}:{{password}}
+
+###
+@companyId = d8100bd3-4b34-eb11-bb70-000d3a2a7faf 
+
+###
+// get Gen. Jnl. Batch
+GET {{hostname}}/api/v2.0/companies({{companyId}})/journals
+Authorization: Basic {{userName}}:{{password}}
+
+###
+@batchId = e17cbf14-4c34-eb11-bb70-000d3a2a7faf
+
+###
+@commentValue = '{"myBooleanField":true,"myDecimalField":500.5,"myTextField":"someText"}'
+###
+//create gen. journal line
+POST {{hostname}}/api/v2.0/companies({{companyId}})/journals({{batchId}})/journalLines
+Authorization: Basic {{userName}}:{{password}}
+Content-Type: application/json
+
+{
+    "accountNumber": "10100",
+	"postingDate": "2021-01-04",
+    "documentNumber": "TESTDK",
+    "externalDocumentNumber":"TestDK-API",
+    "amount":1000,
+    "description":"Created from API",
+    "comment": {{commentValue}}
+}
