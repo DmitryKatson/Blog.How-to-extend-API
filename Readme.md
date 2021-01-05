@@ -1,0 +1,1 @@
+https://community.dynamics.com/business/b/dkatson/posts/how-to-extend-business-central-api-without-extensions
