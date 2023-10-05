@@ -18,7 +18,8 @@ tableextension 50100 "GenJnlLineExt" extends "Gen. Journal Line"
         Jobj: JsonObject;
     begin
         if Session.CurrentClientType <> ClientType::ODataV4 then
-            exit;
+            if Session.CurrentClientType <> ClientType::Api then
+                exit;
 
         if Rec.Comment = '' then
             exit;
